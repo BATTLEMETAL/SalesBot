@@ -14,6 +14,10 @@ Automatyzacja żmudnego procesu raportowania. Skrypt pobiera surowe, nieustruktu
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/67d143c7-1105-4b44-9fef-ab0fa0a1729a" />
 
 
+<img width="3553" height="2054" alt="image" src="https://github.com/user-attachments/assets/a7e0ac9a-72af-43e8-aea8-e14d9b2b3667" />
+
+
+
 
 ## 🚀 Quick Start
 Projekt można uruchomić lokalnie używając wirtualnego środowiska:
