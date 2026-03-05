@@ -11,7 +11,8 @@ Automatyzacja żmudnego procesu raportowania. Skrypt pobiera surowe, nieustruktu
 * **Report Generation:** `ReportLab`
 
 ## 📸 Przykładowy Raport (Showcase)
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0e006bbf-9ba8-49d3-b85d-86dd1cb61300" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/67d143c7-1105-4b44-9fef-ab0fa0a1729a" />
+
 
 
 ## 🚀 Quick Start
