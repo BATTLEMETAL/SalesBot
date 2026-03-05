@@ -11,7 +11,8 @@ Automatyzacja żmudnego procesu raportowania. Skrypt pobiera surowe, nieustruktu
 * **Report Generation:** `ReportLab`
 
 ## 📸 Przykładowy Raport (Showcase)
-*(TUTAJ WSTAW ZDJĘCIE - zrób screenshota jakiegoś zanonimizowanego PDFa z wykresem, którego ten bot generuje i wrzuć to jako obrazek do README. Np.: `![Przykładowy Raport](link_do_obrazka.png)`)*
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0e006bbf-9ba8-49d3-b85d-86dd1cb61300" />
+
 
 ## 🚀 Quick Start
 Projekt można uruchomić lokalnie używając wirtualnego środowiska:
