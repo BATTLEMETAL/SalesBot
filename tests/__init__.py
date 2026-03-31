@@ -1,0 +1,1 @@
+# SalesBot test suite

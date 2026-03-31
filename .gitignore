@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+
+# Virtual environments
+venv/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Generated output
+*.pdf
+*.png
+*.csv
+processed_*.xlsx
+
+# OS
+Thumbs.db
+.DS_Store
