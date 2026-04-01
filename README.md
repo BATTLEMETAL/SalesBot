@@ -1,32 +1,32 @@
 <p align="center">
   <h1 align="center">📊 SalesBot — Automated Sales Report Generator</h1>
   <p align="center">
-    <em>Reads Excel sales data, generates PDF reports with visualizations, and exports CSV summaries — fully automated.</em>
+    <em>An enterprise-grade automation tool that transforms raw Excel sales data into professional PDF reports and actionable CSV summaries.</em>
   </p>
   <p align="center">
+    <a href="https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml"><img src="https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
     <img src="https://img.shields.io/badge/python-3.10%2B-blue?logo=python" alt="Python">
     <img src="https://img.shields.io/badge/data-pandas-green" alt="pandas">
     <img src="https://img.shields.io/badge/reports-ReportLab-orange" alt="ReportLab">
     <img src="https://img.shields.io/badge/charts-matplotlib-red" alt="matplotlib">
-    <img src="https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml/badge.svg" alt="CI">
   </p>
 </p>
 
 ---
 
-## 🎯 Problem
+## 🎯 Problem Statement
 
-Sales teams often receive raw data in Excel spreadsheets that need to be manually aggregated, visualized, and formatted into presentable reports. This process is repetitive, error-prone, and time-consuming.
+Sales operations teams frequently struggle with the manual overhead of aggregating raw Excel spreadsheets. This manual workflow is not only time-consuming but introduces significant risks of human error during data consolidation and visualization.
 
 ## 💡 Solution
 
-**SalesBot** automates the entire reporting pipeline:
+**SalesBot** provides a robust, automated pipeline to streamline reporting:
 
-1. **📥 Data Ingestion** — Reads multiple Excel files (`.xlsx`) using `openpyxl` and `pandas`
-2. **📊 Aggregation** — Groups data by region, calculates totals and averages
-3. **📈 Visualization** — Generates bar charts with `matplotlib`
-4. **📄 PDF Report** — Creates formatted PDF reports using `ReportLab` with tables and charts
-5. **💾 CSV Export** — Exports processed data for further analysis
+1. **Data Ingestion**: High-performance parsing of `.xlsx` files using `pandas` and `openpyxl`.
+2. **Data Analysis**: Automated aggregation, regional grouping, and statistical calculation.
+3. **Visualization**: Dynamic generation of professional-grade bar charts via `matplotlib`.
+4. **Reporting**: Automated PDF document assembly using `ReportLab`.
+5. **Export**: Standardized CSV output for downstream BI integration.
 
 ---
 
@@ -34,10 +34,10 @@ Sales teams often receive raw data in Excel spreadsheets that need to be manuall
 
 ```mermaid
 graph LR
-    A[📁 Excel Files<br/>.xlsx] --> B[📥 excel_reader.py<br/>Data Ingestion]
-    B --> C[🔄 pandas<br/>Aggregation & Analysis]
-    C --> D[📈 chart_creator.py<br/>matplotlib Visualizations]
-    C --> E[📄 report_generator.py<br/>ReportLab PDF Generation]
+    A[📁 Excel Files] --> B[📥 excel_reader.py]
+    B --> C[🔄 pandas Analysis]
+    C --> D[📈 chart_creator.py]
+    C --> E[📄 report_generator.py]
     D --> E
     E --> F[📊 sales_report.pdf]
     C --> G[💾 processed_sales.csv]
@@ -49,45 +49,60 @@ graph LR
 
 ```
 SalesBot/
-├── main.py               # Entry point — orchestrates the full pipeline
-├── excel_reader.py        # Excel file reading + data processing
-├── report_generator.py    # PDF report generation (ReportLab)
-├── chart_creator.py       # Bar chart creation (matplotlib)
-└── data/                  # Input Excel files directory
+├── main.py               # Pipeline orchestration
+├── excel_reader.py        # Data ingestion logic
+├── report_generator.py    # PDF layout engine
+├── chart_creator.py       # Visualization module
+├── tests/                 # Unit and integration tests
+├── .github/workflows/     # CI/CD pipeline configuration
+└── data/                  # Input directory
 ```
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Component | Technology |
-|-----------|------------|
-| **Data Processing** | pandas, openpyxl |
+| Layer | Technology |
+| :--- | :--- |
+| **Core Engine** | Python 3.10+ |
+| **Data Processing** | pandas, openpyxl, numpy |
 | **PDF Generation** | ReportLab |
-| **Visualization** | matplotlib |
-| **Export** | CSV (pandas) |
+| **Visualization** | matplotlib, seaborn |
+| **Testing** | pytest, tox |
+| **CI/CD** | GitHub Actions |
+
+---
+
+## 🧪 Testing
+
+The project maintains a comprehensive test suite to ensure data integrity and pipeline stability. To run the tests:
+
+```bash
+pip install pytest
+pytest tests/
+```
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Clone
+# Clone the repository
 git clone https://github.com/BATTLEMETAL/SalesBot.git
-cd salesbot
+cd SalesBot
 
 # Install dependencies
-pip install pandas openpyxl reportlab matplotlib
+pip install -r requirements.txt
 
-# Place your Excel files in data/
-# Run the pipeline
+# Execute the pipeline
 python main.py
 ```
 
-### Output
-- `sales_report.pdf` — Formatted PDF with regional sales breakdown
-- `sales_chart.png` — Bar chart visualization
-- `processed_sales.csv` — Clean aggregated data
+---
+
+## 🔗 Related Projects
+
+* [**Synapsa**](https://github.com/BATTLEMETAL/Synapsa) — An advanced data intelligence platform for predictive sales forecasting and trend analysis.
 
 ---
 
