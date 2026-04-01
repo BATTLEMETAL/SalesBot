@@ -8,6 +8,7 @@
     <img src="https://img.shields.io/badge/data-pandas-green" alt="pandas">
     <img src="https://img.shields.io/badge/reports-ReportLab-orange" alt="ReportLab">
     <img src="https://img.shields.io/badge/charts-matplotlib-red" alt="matplotlib">
+    <img src="https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml/badge.svg" alt="CI">
   </p>
 </p>
 
@@ -72,7 +73,7 @@ SalesBot/
 
 ```bash
 # Clone
-git clone https://github.com/yourusername/salesbot.git
+git clone https://github.com/BATTLEMETAL/SalesBot.git
 cd salesbot
 
 # Install dependencies
