@@ -1,111 +1,96 @@
-<p align="center">
-  <h1 align="center">📊 SalesBot — Automated Sales Report Generator</h1>
-  <p align="center">
-    <em>An enterprise-grade automation tool that transforms raw Excel sales data into professional PDF reports and actionable CSV summaries.</em>
-  </p>
-  <p align="center">
-    <a href="https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml"><img src="https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
-    <img src="https://img.shields.io/badge/python-3.10%2B-blue?logo=python" alt="Python">
-    <img src="https://img.shields.io/badge/data-pandas-green" alt="pandas">
-    <img src="https://img.shields.io/badge/reports-ReportLab-orange" alt="ReportLab">
-    <img src="https://img.shields.io/badge/charts-matplotlib-red" alt="matplotlib">
-  </p>
-</p>
+# 📊 SalesBot — Automated Sales Report Generator
+
+[![CI](https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml/badge.svg)](https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](.)
+[![Tests](https://img.shields.io/badge/Tests-12%20passing-brightgreen)](./tests/test_sales.py)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
+Transforms raw Excel sales data into professional PDF reports and CSV summaries. Built with clean architecture, full pytest coverage, and a GitHub Actions CI pipeline that runs on every push.
 
 ---
 
-## 🎯 Problem Statement
+## 🔄 Pipeline
 
-Sales operations teams frequently struggle with the manual overhead of aggregating raw Excel spreadsheets. This manual workflow is not only time-consuming but introduces significant risks of human error during data consolidation and visualization.
-
-## 💡 Solution
-
-**SalesBot** provides a robust, automated pipeline to streamline reporting:
-
-1. **Data Ingestion**: High-performance parsing of `.xlsx` files using `pandas` and `openpyxl`.
-2. **Data Analysis**: Automated aggregation, regional grouping, and statistical calculation.
-3. **Visualization**: Dynamic generation of professional-grade bar charts via `matplotlib`.
-4. **Reporting**: Automated PDF document assembly using `ReportLab`.
-5. **Export**: Standardized CSV output for downstream BI integration.
-
----
-
-## 🏗️ Architecture
-
-```mermaid
-graph LR
-    A[📁 Excel Files] --> B[📥 excel_reader.py]
-    B --> C[🔄 pandas Analysis]
-    C --> D[📈 chart_creator.py]
-    C --> E[📄 report_generator.py]
-    D --> E
-    E --> F[📊 sales_report.pdf]
-    C --> G[💾 processed_sales.csv]
+```
+Excel files (data/*.xlsx)
+        │
+        ▼
+excel_reader.py  ──►  calculate_totals_by_region()
+        │
+        ▼
+chart_creator.py  ──►  matplotlib bar chart (sales_chart.png)
+        │
+        ▼
+report_generator.py  ──►  ReportLab PDF (sales_report.pdf)
 ```
 
 ---
 
-## 📂 Project Structure
+## 🧪 Tests — 12 Unit Tests, 3 Classes
 
+```bash
+pytest tests/ -v
 ```
-SalesBot/
-├── main.py               # Pipeline orchestration
-├── excel_reader.py        # Data ingestion logic
-├── report_generator.py    # PDF layout engine
-├── chart_creator.py       # Visualization module
-├── tests/                 # Unit and integration tests
-├── .github/workflows/     # CI/CD pipeline configuration
-└── data/                  # Input directory
-```
+
+| Test Class | Tests | What It Covers |
+|---|---|---|
+| `TestCalculateTotalsByRegion` | 8 | Region grouping, grand totals, edge cases (empty DataFrame, single region) |
+| `TestSaveDataToCsv` | 3 | File creation, column presence, row count integrity |
+| `TestReportGenerator` | 1 | End-to-end smoke test — verifies PDF is generated without errors |
+
+All tests run **without Excel files on disk** — fixtures provide synthetic DataFrames. CI runs headlessly on every push via GitHub Actions.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-| :--- | :--- |
-| **Core Engine** | Python 3.10+ |
-| **Data Processing** | pandas, openpyxl, numpy |
-| **PDF Generation** | ReportLab |
-| **Visualization** | matplotlib, seaborn |
-| **Testing** | pytest, tox |
-| **CI/CD** | GitHub Actions |
-
----
-
-## 🧪 Testing
-
-The project maintains a comprehensive test suite to ensure data integrity and pipeline stability. To run the tests:
-
-```bash
-pip install pytest
-pytest tests/
-```
+| Component | Technology |
+|---|---|
+| Data processing | pandas |
+| Visualization | matplotlib |
+| PDF generation | ReportLab |
+| Excel reading | openpyxl |
+| Testing | pytest + fixtures |
+| CI/CD | GitHub Actions |
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Clone the repository
 git clone https://github.com/BATTLEMETAL/SalesBot.git
 cd SalesBot
-
-# Install dependencies
 pip install -r requirements.txt
 
-# Execute the pipeline
+# Generate sample data
+python demo_setup.py
+
+# Run pipeline
 python main.py
+# → sales_report.pdf + sales_chart.png
+
+# Run tests
+pytest tests/ -v
 ```
 
 ---
 
-## 🔗 Related Projects
+## 📁 Project Structure
 
-* [**Synapsa**](https://github.com/BATTLEMETAL/Synapsa) — An advanced data intelligence platform for predictive sales forecasting and trend analysis.
+```
+SalesBot/
+├── main.py               # Pipeline orchestrator
+├── excel_reader.py       # Data ingestion + region aggregation
+├── report_generator.py   # ReportLab PDF export
+├── chart_creator.py      # matplotlib chart generation
+├── demo_setup.py         # Sample data generator
+├── tests/
+│   └── test_sales.py     # 12 unit tests (3 classes)
+├── .github/workflows/
+│   └── ci.yml            # GitHub Actions — lint + pytest on push
+└── requirements.txt
+```
 
 ---
 
-## 📜 License
-
-MIT License
+*Part of portfolio demonstrating clean Python architecture, test-driven development, and CI/CD practices. See also [Synapsa](https://github.com/BATTLEMETAL/Synapsa-Local-LLM-Agent) for AI/LLM work.*
