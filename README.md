@@ -1,11 +1,12 @@
-# 📊 SalesBot — Automated Sales Report Generator
+# 📊 SalesBot — AI-Powered Sales Report Generator
 
 [![CI](https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml/badge.svg)](https://github.com/BATTLEMETAL/SalesBot/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](.)
 [![Tests](https://img.shields.io/badge/Tests-12%20passing-brightgreen)](./tests/test_sales.py)
+[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-412991?logo=openai&logoColor=white)](.)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-Transforms raw Excel sales data into professional PDF reports and CSV summaries. Built with clean architecture, full pytest coverage, and a GitHub Actions CI pipeline that runs on every push.
+Transforms raw Excel sales data into professional PDF reports with an **AI-generated executive summary** (OpenAI GPT-4o-mini). Features clean architecture, full pytest coverage, and a GitHub Actions CI pipeline that runs on every push. Falls back gracefully to rule-based summary when no API key is present (CI-safe).
 
 ---
 
@@ -18,10 +19,14 @@ Excel files (data/*.xlsx)
 excel_reader.py  ──►  calculate_totals_by_region()
         │
         ▼
-chart_creator.py  ──►  matplotlib bar chart (sales_chart.png)
+ai_summary.py    ──►  OpenAI GPT-4o-mini executive summary
+        │           (fallback: rule-based when no API key)
+        ▼
+chart_creator.py ──►  matplotlib bar chart (sales_chart.png)
         │
         ▼
-report_generator.py  ──►  ReportLab PDF (sales_report.pdf)
+report_generator.py ►  ReportLab PDF (sales_report.pdf)
+                        └─ includes AI summary section at top
 ```
 
 ---
@@ -47,6 +52,7 @@ All tests run **without Excel files on disk** — fixtures provide synthetic Dat
 | Component | Technology |
 |---|---|
 | Data processing | pandas |
+| AI executive summary | OpenAI GPT-4o-mini (+ rule-based fallback) |
 | Visualization | matplotlib |
 | PDF generation | ReportLab |
 | Excel reading | openpyxl |
@@ -81,14 +87,16 @@ pytest tests/ -v
 SalesBot/
 ├── main.py               # Pipeline orchestrator
 ├── excel_reader.py       # Data ingestion + region aggregation
-├── report_generator.py   # ReportLab PDF export
+├── ai_summary.py         # OpenAI GPT-4o-mini executive summary + fallback
+├── report_generator.py   # ReportLab PDF export (embeds AI summary)
 ├── chart_creator.py      # matplotlib chart generation
 ├── demo_setup.py         # Sample data generator
 ├── tests/
 │   └── test_sales.py     # 12 unit tests (3 classes)
 ├── .github/workflows/
 │   └── ci.yml            # GitHub Actions — lint + pytest on push
-└── requirements.txt
+├── requirements.txt
+└── .env.example          # API key template
 ```
 
 ---
