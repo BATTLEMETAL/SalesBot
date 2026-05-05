@@ -6,12 +6,13 @@ from reportlab.pdfgen import canvas
 import matplotlib.pyplot as plt
 
 
-def generate_report(data):
+def generate_report(data, ai_summary: str = ""):
     """
     Generate a PDF report based on the provided data.
 
     Args:
         data (DataFrame): Processed data containing sales figures by region.
+        ai_summary (str): Optional AI-generated executive summary to embed in the PDF.
     """
     # Create a new PDF file
     c = canvas.Canvas("sales_report.pdf", pagesize=letter)
@@ -24,14 +25,39 @@ def generate_report(data):
     # Draw a line under the title
     c.line(40, height - 55, width - 40, height - 55)
 
+    # AI Executive Summary section
+    y_start = height - 75
+    if ai_summary:
+        c.setFont("Helvetica-Bold", 11)
+        c.drawString(40, y_start, "Executive Summary (AI)")
+        y_start -= 15
+        c.setFont("Helvetica", 9)
+        # Word-wrap the summary into lines of ~100 chars
+        words = ai_summary.split()
+        line, lines = [], []
+        for word in words:
+            if len(" ".join(line + [word])) <= 100:
+                line.append(word)
+            else:
+                lines.append(" ".join(line))
+                line = [word]
+        if line:
+            lines.append(" ".join(line))
+        for l in lines:
+            c.drawString(40, y_start, l)
+            y_start -= 12
+        y_start -= 8
+        c.line(40, y_start, width - 40, y_start)
+        y_start -= 15
+
     # Write the table header
     c.setFont("Helvetica-Bold", 12)
-    c.drawString(40, height - 70, "Region")
-    c.drawString(180, height - 70, "Total Sales ($)")
-    c.drawString(320, height - 70, "Average Sale ($)")
+    c.drawString(40, y_start, "Region")
+    c.drawString(180, y_start, "Total Sales ($)")
+    c.drawString(320, y_start, "Average Sale ($)")
 
     # Set up the data rows
-    y_position = height - 90
+    y_position = y_start - 20
     total_sales = data['Total Sales'].sum()
     average_sale = total_sales / len(data) if len(data) > 0 else 0
 

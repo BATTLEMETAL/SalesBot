@@ -8,6 +8,7 @@ import shutil
 from excel_reader import read_excel_file, calculate_totals_by_region
 from report_generator import generate_report
 from chart_creator import create_bar_chart
+from ai_summary import generate_ai_summary
 
 def main():
     if not os.path.exists('data'):
@@ -33,10 +34,14 @@ def main():
     # Rename columns to match what report_generator.py expects ("Region", "Total Sales")
     total_sales_per_region.columns = ['Region', 'Total Sales']
 
-    # Step 3: Generate PDF Report
+    # Step 3: AI Executive Summary
+    print("🤖 Generowanie AI summary...")
+    summary = generate_ai_summary(total_sales_per_region)
+    print(f"\n📊 AI EXECUTIVE SUMMARY:\n{summary}\n")
+
+    # Step 4: Generate PDF Report
     print("📄 Generowanie raportu PDF...")
-    # report_generator.py ma wbudowaną funkcję generate_report(data) która domyślnie zapisuje "sales_report.pdf"
-    generate_report(total_sales_per_region)
+    generate_report(total_sales_per_region, ai_summary=summary)
 
     # Step 4: Create Bar Chart
     print("📈 Tworzenie wykresu...")
