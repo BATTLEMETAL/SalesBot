@@ -1,7 +1,9 @@
 import pandas as pd
 from openpyxl import load_workbook
-from report_generator import generate_report
-from chart_creator import create_bar_chart
+
+# NOTE: report_generator and chart_creator are imported only inside __main__
+# to avoid circular dependencies (this module is imported by both of them).
+
 
 
 def read_excel_file(file_path):
@@ -55,29 +57,34 @@ def save_data_to_csv(df, output_path):
 
 
 if __name__ == "__main__":
+    from report_generator import generate_report
+    from chart_creator import create_bar_chart
+
     # File paths
     input_file = "sales_data.xlsx"
     output_file = "processed_sales.csv"
     report_file = "sales_report.pdf"
-    
+
     # Step 1: Read the Excel file
     print("Reading the Excel file...")
     data_frame = read_excel_file(input_file)
-    
+
     # Step 2: Calculate totals by region
     print("Calculating totals by region...")
     totals = calculate_totals_by_region(data_frame)
-    
+
     # Step 3: Save the processed data to a CSV file
     print(f"Saving processed data to {output_file}...")
     save_data_to_csv(totals, output_file)
-    
+
     # Step 4: Generate the PDF report
     print(f"Generating the report at {report_file}...")
-    generate_pdf_report(report_file, totals)
-    
+    totals_df = totals.reset_index()
+    totals_df.columns = ["Region", "Total Sales"]
+    generate_report(totals_df)
+
     # Step 5: Create a bar chart
     print("Creating a bar chart...")
-    create_bar_chart(totals, "Total Sales by Region")
-    
-    print("Process completed successfully.")
+    create_bar_chart(totals)
+
+    print("Process completed successfully.")

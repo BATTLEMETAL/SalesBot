@@ -53,22 +53,19 @@ def generate_report(data, ai_summary: str = ""):
     # Write the table header
     c.setFont("Helvetica-Bold", 12)
     c.drawString(40, y_start, "Region")
-    c.drawString(180, y_start, "Total Sales ($)")
-    c.drawString(320, y_start, "Average Sale ($)")
+    c.drawString(250, y_start, "Total Sales ($)")
 
     # Set up the data rows
     y_position = y_start - 20
-    total_sales = data['Total Sales'].sum()
-    average_sale = total_sales / len(data) if len(data) > 0 else 0
 
     for index, row in data.iterrows():
         c.setFont("Helvetica", 10)
-        c.drawString(40, y_position, row['Region'])
-        c.drawString(180, y_position, f"{row['Total Sales']:.2f}")
-        c.drawString(320, y_position, f"{average_sale:.2f}")
+        c.drawString(40, y_position, str(row['Region']))
+        c.drawString(250, y_position, f"{row['Total Sales']:.2f}")
 
         # Move to the next row
         y_position -= 20
+
 
     # Add a footer
     c.setFont("Helvetica", 10)
